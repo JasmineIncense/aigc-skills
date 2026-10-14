@@ -63,4 +63,4 @@ description: "生图、生成图片、改图、场景图、角色道具图、分
 
 ## 安装
 
-自动调用默认开启。从技能目录运行 `python3 scripts/install.py`，复制到个人技能目录，并写入全局“image-gen 调用前先读本技能”的规则。`--codex-home` 指定目的地；已有同名内容不同则停止，明确更新可传 `--replace`（会备份）。下一轮会话开始使用新的技能发现信息。
+自动调用默认开启。运行 `npx --yes github:JasmineIncense/aigc-skills`，即可安装到个人技能目录并写入全局“image-gen 调用前先读本技能”的规则。`--codex-home` 指定目的地；已有同名内容不同则停止，明确更新可传 `--replace`（会备份）。无需手动 clone 或安装 Python。独立技能压缩包也可从技能目录运行 `python3 scripts/install.py`。下一轮会话开始使用新的技能发现信息。

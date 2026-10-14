@@ -1,0 +1,20 @@
+{
+  "name": "aigc-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Install reusable AIGC skills and Codex image-generation preferences",
+  "bin": {
+    "aigc-skills": "bin/aigc-skills.mjs"
+  },
+  "files": ["bin/", "lib/", "skills/", "README.md"],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasmineIncense/aigc-skills.git"
+  }
+}

@@ -12,10 +12,13 @@
 
 ## 安装到 Codex
 
+安装 Node.js 18 或更新版本后，直接运行：
+
 ```bash
-git clone https://github.com/JasmineIncense/aigc-skills.git
-python3 aigc-skills/skills/picturebook-image-style/scripts/install.py
+npx --yes github:JasmineIncense/aigc-skills
 ```
+
+无需手动 clone 仓库或安装 Python。安装器使用 Node.js 内置模块，没有额外运行依赖。
 
 安装脚本把技能复制到 `$CODEX_HOME/skills/picturebook-image-style`（未设置时为 `~/.codex/skills/picturebook-image-style`），并在有效的全局 `AGENTS.md` 或 `AGENTS.override.md` 中添加调用规则：图片创作请求及每次 image-gen 调用前，先读取本技能。保留其他指令，备份已有指令文件；重复安装不会重复添加规则。
 
@@ -24,9 +27,19 @@ python3 aigc-skills/skills/picturebook-image-style/scripts/install.py
 指定其他安装位置：
 
 ```bash
-python3 aigc-skills/skills/picturebook-image-style/scripts/install.py --codex-home /path/to/codex-home
+npx --yes github:JasmineIncense/aigc-skills --codex-home /path/to/codex-home
 ```
 
 更新已安装版本时，脚本会保护内容不同的已有目录；确认更新可加 `--replace`，旧技能会先备份。
+
+```bash
+npx --yes github:JasmineIncense/aigc-skills --replace
+```
+
+查看参数：`npx --yes github:JasmineIncense/aigc-skills --help`。
+
+## 本地或压缩包安装
+
+已有完整仓库时，也可运行 `node bin/aigc-skills.mjs`。独立技能压缩包仍可用 `python3 scripts/install.py` 安装。
 
 若通过普通技能安装器仅复制了技能目录，再运行安装后目录中的 `scripts/install.py`，即可添加全局调用规则。

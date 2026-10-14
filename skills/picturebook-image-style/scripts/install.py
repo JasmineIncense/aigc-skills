@@ -51,7 +51,7 @@ def install(codex_dir, replace=False):
 ## 默认图片创作技能
 
 用户请求生图、生成图片、改图、场景图、角色道具图、分镜图、关键帧或生图提示词时，以及每次调用 image-gen/image_gen 前，先读取 `{entry}`，自动应用 picturebook-image-style，无需点名技能。
-未指定画风时采用 本技能的圆润短绒角色、纸艺软陶场景与清透绘本配色；用户指定的其他画风、参考图与编辑保留要求优先。图片生成和编辑使用内置 image-gen；即梦仅用于视频生成。
+未指定画风时采用本技能的圆润短绒角色、纸艺软陶场景与清透绘本配色；用户指定的其他画风、参考图与编辑保留要求优先。图片生成和编辑使用内置 image-gen；即梦仅用于视频生成。
 {END}"""
     if start_count:
         left = existing.index(START)
