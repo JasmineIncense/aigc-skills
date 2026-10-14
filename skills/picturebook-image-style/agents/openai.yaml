@@ -1,0 +1,6 @@
+interface:
+  display_name: "绘本生图风格"
+  short_description: "生图与改图默认采用圆润短绒角色、纸艺软陶场景和清透绘本配色"
+  default_prompt: "使用 $picturebook-image-style，根据我的需求用 image-gen 生成或修改图片。"
+policy:
+  allow_implicit_invocation: true
