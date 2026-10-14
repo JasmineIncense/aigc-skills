@@ -1,0 +1,58 @@
+{
+  "documents": [
+    {
+      "original": "01.剧本创作 Skill v2.0.md",
+      "packaged": "screenplay-creation.md",
+      "bytes": 28099,
+      "sha256": "ed75ec012a7f8753a190664888dca07d282b741cf3fc2636f393179eddab8629"
+    },
+    {
+      "original": "03.剧本医生 · 圆桌会诊.md",
+      "packaged": "screenplay-roundtable.md",
+      "bytes": 42503,
+      "sha256": "a8c8371f2ee4b6fde9c0ac42b86ec6654fd205bad9f717923f4c41f88a69cf73"
+    },
+    {
+      "original": "04.台词专家 · 全量诊断 skill.md",
+      "packaged": "dialogue-diagnosis.md",
+      "bytes": 22977,
+      "sha256": "6bf028d207ce84912ba99fbac1b2ecffa4b3cb153ca93709b7da44dce2cac178"
+    },
+    {
+      "original": "剧本转 AI 视频分镜.md",
+      "packaged": "screenplay-to-storyboard.md",
+      "bytes": 100800,
+      "sha256": "7d6061e7c4105f4c4954d9b438e1eb2a35e3cf9b46fa70c14c9af276940eee31"
+    },
+    {
+      "original": "附加/009 梦导分镜设计.md",
+      "packaged": "seedance-storyboard.md",
+      "bytes": 5197,
+      "sha256": "1f0e113664ab0a85a1f5b7fd58d924df4e08f5d6a751ea38b284dd8a97920372"
+    },
+    {
+      "original": "附加/AIGC_video_prompt_skill.md",
+      "packaged": "video-image-prompt-collaboration.md",
+      "bytes": 11884,
+      "sha256": "c9d219d310368ec72a100fde38963cdf4a569ebdd519952700f6a802da2583b7"
+    },
+    {
+      "original": "附加/通用视频Prompt规则与元模板.md",
+      "packaged": "controllable-video-prompts.md",
+      "bytes": 10394,
+      "sha256": "1a9af50a18c269eff1e7a34623f9418f9890c5c20faee74b7939184826876979"
+    },
+    {
+      "original": "附加/gpt-image-2_噪点过锐处理方法论.md",
+      "packaged": "image-texture.md",
+      "bytes": 10547,
+      "sha256": "3adc29056e03e86d2b992f76deb51b314056ba3b669d167099348e379c8587a5"
+    },
+    {
+      "original": "附加/neowow_元启录_全链路完整分析终版.md",
+      "packaged": "neowow-yuanqilu-workflow.md",
+      "bytes": 900590,
+      "sha256": "3b1c8c9d17c8dea66bdcdaa090c7f9815685434d2373be2959796360cbb6d074"
+    }
+  ]
+}

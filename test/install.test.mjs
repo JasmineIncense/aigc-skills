@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import test from 'node:test';
-import { install, skillName } from '../lib/install.mjs';
+import { install, skillName, skillNames } from '../lib/install.mjs';
 
 function temporary(t) {
   const home = mkdtempSync(join(tmpdir(), 'aigc-skills-test-'));
@@ -70,11 +71,75 @@ test('malformed or reversed rule markers stop before creating skill files', (t) 
 test('CLI rejects missing values and unknown flags without installation; help works', (t) => {
   const home = temporary(t);
   const cli = new URL('../bin/aigc-skills.mjs', import.meta.url);
-  for (const args of [['--codex-home'], ['--unknown']]) {
+  for (const args of [['--codex-home'], ['--unknown'], ['--skill'], ['--all', '--skill', skillName]]) {
     const r = spawnSync(process.execPath, [cli.pathname, ...args], { env: { ...process.env, CODEX_HOME: home }, encoding: 'utf8' });
     assert.equal(r.status, 1);
     assert.ok(!existsSync(join(home, 'skills')));
   }
   const help = spawnSync(process.execPath, [cli.pathname, '--help'], { encoding: 'utf8' });
   assert.equal(help.status, 0); assert.ok(help.stdout.includes('npx'));
+});
+
+test('video-only installation preserves all nine original documents and does not install image style', (t) => {
+  const home = temporary(t);
+  const { destination, agents } = install({ codexHome: home, skills: ['ai-video-generation'] });
+  assert.ok(!existsSync(join(home, 'skills', skillName)));
+  const sources = JSON.parse(readFileSync(join(destination, 'references/sources.json'), 'utf8'));
+  assert.equal(sources.documents.length, 9);
+  for (const document of sources.documents) {
+    const data = readFileSync(join(destination, 'references', document.packaged));
+    assert.equal(data.length, document.bytes);
+    assert.equal(createHash('sha256').update(data).digest('hex'), document.sha256);
+  }
+  const rules = readFileSync(agents, 'utf8');
+  assert.ok(rules.includes(join(destination, 'SKILL.md')));
+  assert.ok(!rules.includes('<!-- picturebook-image-style:start -->'));
+});
+
+test('all-skills installation and adding modules later create independent non-duplicated routes', (t) => {
+  const home = temporary(t);
+  install({ codexHome: home, skills: ['ai-video-generation'] });
+  install({ codexHome: home });
+  const all = install({ codexHome: home, skills: skillNames });
+  assert.equal(all.items.length, 2);
+  const before = readFileSync(all.agents);
+  install({ codexHome: home, skills: skillNames });
+  assert.deepEqual(readFileSync(all.agents), before);
+  for (const name of skillNames) {
+    assert.ok(existsSync(join(home, 'skills', name, 'SKILL.md')));
+    assert.equal(before.toString().split(`<!-- ${name}:start -->`).length - 1, 1);
+  }
+});
+
+test('a conflict in the second module prevents partial installation of the first module', (t) => {
+  const home = temporary(t);
+  const existing = install({ codexHome: home, skills: ['ai-video-generation'] });
+  writeFileSync(join(existing.destination, 'SKILL.md'), 'user edits');
+  const before = readFileSync(existing.agents);
+  assert.throws(() => install({ codexHome: home, skills: skillNames }), /--replace/);
+  assert.ok(!existsSync(join(home, 'skills', skillName)));
+  assert.deepEqual(readFileSync(existing.agents), before);
+});
+
+test('unknown skill names and traversal are rejected before any files are created', (t) => {
+  const home = temporary(t);
+  for (const name of ['unknown', '../escape']) {
+    assert.throws(() => install({ codexHome: home, skills: [name] }));
+    assert.ok(!existsSync(join(home, 'skills')));
+    assert.ok(!existsSync(join(home, 'AGENTS.md')));
+  }
+});
+
+test('CLI all and selective installation install the requested modules', (t) => {
+  const root = temporary(t);
+  const cli = new URL('../bin/aigc-skills.mjs', import.meta.url);
+  const selected = join(root, 'selected');
+  const all = join(root, 'all');
+  for (const [home, args] of [[selected, ['--skill', 'ai-video-generation']], [all, ['--all']]]) {
+    const r = spawnSync(process.execPath, [cli.pathname, ...args, '--codex-home', home], { encoding: 'utf8' });
+    assert.equal(r.status, 0, r.stderr);
+    assert.ok(existsSync(join(home, 'skills/ai-video-generation/SKILL.md')));
+  }
+  assert.ok(!existsSync(join(selected, 'skills', skillName)));
+  assert.ok(existsSync(join(all, 'skills', skillName, 'SKILL.md')));
 });
