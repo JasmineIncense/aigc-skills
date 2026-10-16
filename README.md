@@ -17,7 +17,7 @@ npx --yes github:JasmineIncense/aigc-skills
 ### 只安装 AI 视频生成技能
 
 ```bash
-npx --yes github:JasmineIncense/aigc-skills --skill ai-video-generation
+npx --yes github:JasmineIncense/aigc-skills --skill aigc-skill
 ```
 
 ### 安装全部图片与视频技能
@@ -26,14 +26,14 @@ npx --yes github:JasmineIncense/aigc-skills --skill ai-video-generation
 npx --yes github:JasmineIncense/aigc-skills --all
 ```
 
-安装完成后，开始下一轮 Codex 会话即可使用。安装器会添加对应的自动调用规则：图片创作和 image-gen 调用前读取图片技能；视频相关任务读取视频技能，并按需选择参考文档。也可以显式输入 `$picturebook-image-style` 或 `$ai-video-generation`。
+安装完成后，开始下一轮 Codex 会话即可使用。安装器会添加对应的自动调用规则：图片创作和 image-gen 调用前读取图片技能；视频相关任务读取视频技能，并按需选择参考文档。也可以显式输入 `$picturebook-image-style` 或 `$aigc-skill`。
 
 ## 可以直接复制的启动指令
 
 安装 AI 视频技能后，将下面的指令复制到 Codex，并填写已有信息；缺失项目可保留“未确定”：
 
 ```text
-使用 $ai-video-generation，根据以下需求制作 AI 视频。
+使用 $aigc-skill，根据以下需求制作 AI 视频。
 
 需求文档链接或剧本：[填写链接、粘贴剧本或提供本地文件路径]
 已有角色图：[附件或文件路径]
@@ -55,9 +55,9 @@ npx --yes github:JasmineIncense/aigc-skills --all
 | 技能 | 适用任务 |
 |---|---|
 | [picturebook-image-style](skills/picturebook-image-style/SKILL.md) | 生图、改图、场景底图、角色道具设定、关键帧、分镜粗稿；默认圆润 3D 造型、细密短绒、局部纸艺、哑光软陶与清透绘本配色。 |
-| [ai-video-generation](skills/ai-video-generation/SKILL.md) | 剧本创作、剧本会诊、台词诊断、AI 分镜、可控视频提示词、Seedance 分镜、视频与图像协同、图像质感，以及 NeoWOW《元启录》案例分析。 |
+| [aigc-skill](skills/aigc-skill/SKILL.md) | 剧本创作、剧本会诊、台词诊断、AI 分镜、可控视频提示词、Seedance 分镜、视频与图像协同、图像质感，以及 NeoWOW《元启录》案例分析。 |
 
-用户明确指定其他画风、功能参考或编辑保留要求时，以用户需求为准。视频技能完整收录 9 份原始文档，按任务读取；[来源清单](skills/ai-video-generation/references/sources.json) 记录原文件名和校验值。
+用户明确指定其他画风、功能参考或编辑保留要求时，以用户需求为准。视频技能完整收录 9 份原始文档，按任务读取；[来源清单](skills/aigc-skill/references/sources.json) 记录原文件名和校验值。
 
 ## 安装选项与更新
 

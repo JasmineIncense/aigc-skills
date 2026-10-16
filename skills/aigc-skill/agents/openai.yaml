@@ -1,6 +1,6 @@
 interface:
   display_name: "AI 视频生成"
   short_description: "从剧本创作、诊断与台词到 AI 分镜、视频提示词和关键帧协同"
-  default_prompt: "使用 $ai-video-generation，把我的故事整理成可生成的 AI 视频分镜和提示词。"
+  default_prompt: "使用 $aigc-skill，把我的故事整理成可生成的 AI 视频分镜和提示词。"
 policy:
   allow_implicit_invocation: true

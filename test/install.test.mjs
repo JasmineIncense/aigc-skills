@@ -82,7 +82,7 @@ test('CLI rejects missing values and unknown flags without installation; help wo
 
 test('video-only installation preserves all nine original documents and does not install image style', (t) => {
   const home = temporary(t);
-  const { destination, agents } = install({ codexHome: home, skills: ['ai-video-generation'] });
+  const { destination, agents } = install({ codexHome: home, skills: ['aigc-skill'] });
   assert.ok(!existsSync(join(home, 'skills', skillName)));
   const sources = JSON.parse(readFileSync(join(destination, 'references/sources.json'), 'utf8'));
   assert.equal(sources.documents.length, 9);
@@ -98,7 +98,7 @@ test('video-only installation preserves all nine original documents and does not
 
 test('all-skills installation and adding modules later create independent non-duplicated routes', (t) => {
   const home = temporary(t);
-  install({ codexHome: home, skills: ['ai-video-generation'] });
+  install({ codexHome: home, skills: ['aigc-skill'] });
   install({ codexHome: home });
   const all = install({ codexHome: home, skills: skillNames });
   assert.equal(all.items.length, 2);
@@ -113,7 +113,7 @@ test('all-skills installation and adding modules later create independent non-du
 
 test('a conflict in the second module prevents partial installation of the first module', (t) => {
   const home = temporary(t);
-  const existing = install({ codexHome: home, skills: ['ai-video-generation'] });
+  const existing = install({ codexHome: home, skills: ['aigc-skill'] });
   writeFileSync(join(existing.destination, 'SKILL.md'), 'user edits');
   const before = readFileSync(existing.agents);
   assert.throws(() => install({ codexHome: home, skills: skillNames }), /--replace/);
@@ -135,10 +135,10 @@ test('CLI all and selective installation install the requested modules', (t) => 
   const cli = new URL('../bin/aigc-skills.mjs', import.meta.url);
   const selected = join(root, 'selected');
   const all = join(root, 'all');
-  for (const [home, args] of [[selected, ['--skill', 'ai-video-generation']], [all, ['--all']]]) {
+  for (const [home, args] of [[selected, ['--skill', 'aigc-skill']], [all, ['--all']]]) {
     const r = spawnSync(process.execPath, [cli.pathname, ...args, '--codex-home', home], { encoding: 'utf8' });
     assert.equal(r.status, 0, r.stderr);
-    assert.ok(existsSync(join(home, 'skills/ai-video-generation/SKILL.md')));
+    assert.ok(existsSync(join(home, 'skills/aigc-skill/SKILL.md')));
   }
   assert.ok(!existsSync(join(selected, 'skills', skillName)));
   assert.ok(existsSync(join(all, 'skills', skillName, 'SKILL.md')));

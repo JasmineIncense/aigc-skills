@@ -1,5 +1,5 @@
 ---
-name: ai-video-generation
+name: aigc-skill
 description: "创作 AI 视频：剧本策划、剧本会诊、逐句台词诊断、剧本转分镜、Seedance/文生视频/图生视频提示词、首尾帧与角色图协同，以及 NeoWOW《元启录》制作流程分析。按任务选参考文档，不自动展开所有环节。"
 ---
 
@@ -48,7 +48,7 @@ description: "创作 AI 视频：剧本策划、剧本会诊、逐句台词诊�
 ## 安装
 
 ```bash
-npx --yes github:JasmineIncense/aigc-skills --skill ai-video-generation
+npx --yes github:JasmineIncense/aigc-skills --skill aigc-skill
 ```
 
-安装全部图片与视频技能：`npx --yes github:JasmineIncense/aigc-skills --all`。支持 `--codex-home` 指定目录、`--replace` 备份并更新已有版本。安装会添加对应的全局任务路由；下一轮 Codex 会话可发现，也可显式使用 `$ai-video-generation`。
+安装全部图片与视频技能：`npx --yes github:JasmineIncense/aigc-skills --all`。支持 `--codex-home` 指定目录、`--replace` 备份并更新已有版本。安装会添加对应的全局任务路由；下一轮 Codex 会话可发现，也可显式使用 `$aigc-skill`。
